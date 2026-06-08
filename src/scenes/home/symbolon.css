@@ -1,0 +1,248 @@
+/* ============================================================
+   SYMBOLON 展示首屏(源自 Head01.html)
+   · 字体统一为站点字体:衬线→--font-display(Oswald)、等宽→--font-mono
+   · 颜色变量局部化(--s-*),不污染全局方舟令牌
+   ============================================================ */
+.symbolon {
+  --void: #030303;
+  --s-spine: #0f0f11;
+  --s-border: #222225;
+  --s-text-main: #c9a881;
+  --s-text-bright: #fff7e0;
+  --s-text-meta: #6b6c70;
+  --s-grid-color: rgba(255, 255, 255, 0.02);
+
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--void);
+  color: var(--s-text-main);
+  font-family: var(--font-mono);
+  user-select: none;
+  background-image: linear-gradient(to right, var(--s-grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--s-grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* WebGL 背景 */
+.symbolon__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.symbolon__canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* UI 层(去掉原 spine,改为 主舞台 + 数据面板 两栏) */
+.symbolon__ui {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  pointer-events: none;
+}
+
+/* —— 中央舞台 —— */
+.symbolon__stage {
+  position: relative;
+  pointer-events: none;
+}
+
+.symbolon__topmeta {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--s-border);
+  pointer-events: auto;
+}
+.symbolon__nav {
+  display: flex;
+  gap: 32px;
+}
+.symbolon__navlink {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--s-text-meta);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.symbolon__navlink:hover {
+  color: var(--s-text-bright);
+}
+.symbolon__navlink::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--s-text-bright);
+  transition: width 0.3s ease;
+}
+.symbolon__navlink:hover::after {
+  width: 100%;
+}
+.symbolon__coords {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--s-text-meta);
+}
+
+/* 标题(用 left/right + text-align 居中,避免 transform 与入场动画冲突) */
+.symbolon__titlegroup {
+  position: absolute;
+  bottom: 14vh;
+  left: 0;
+  right: 0;
+  padding: 0 4vw;
+  text-align: center;
+  pointer-events: auto;
+}
+.symbolon__title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 300;
+  letter-spacing: 0.6em;
+  text-indent: 0.6em;
+  line-height: 1;
+  margin-bottom: 24px;
+  color: var(--s-text-main);
+  text-transform: uppercase;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+  mix-blend-mode: screen;
+}
+.symbolon__subtitle {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--s-text-meta);
+}
+
+/* 底部滚动提示 */
+.symbolon__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--s-text-meta);
+  pointer-events: auto;
+  transition: color 0.3s ease;
+}
+.symbolon__scroll:hover {
+  color: var(--s-text-bright);
+}
+.symbolon__chev {
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+  animation: symbolon-bounce 1.8s infinite;
+}
+@keyframes symbolon-bounce {
+  0%,
+  100% {
+    transform: rotate(45deg) translate(0, 0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: rotate(45deg) translate(3px, 3px);
+    opacity: 1;
+  }
+}
+
+/* —— 右侧数据面板 —— */
+.symbolon__data {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 24px;
+  border-left: 1px solid var(--s-border);
+  background: linear-gradient(90deg, rgba(3, 3, 3, 0.8) 0%, rgba(3, 3, 3, 0) 100%);
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+.symbolon__block {
+  margin-bottom: 40px;
+}
+.symbolon__block--last {
+  margin-bottom: 0;
+}
+.symbolon__label {
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--s-text-meta);
+  border-bottom: 1px solid var(--s-border);
+}
+.symbolon__value {
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  color: var(--s-text-main);
+}
+.symbolon__value--bright {
+  color: var(--s-text-bright);
+}
+.symbolon__semiotic {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.symbolon__item {
+  padding: 12px;
+  border: 1px solid var(--s-border);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.symbolon__item:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+.symbolon__item-title {
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--s-text-bright);
+}
+.symbolon__item-desc {
+  font-size: 9px;
+  line-height: 1.4;
+  color: var(--s-text-meta);
+}
+
+/* —— 响应式 —— */
+@media (max-width: 1024px) {
+  .symbolon__ui {
+    grid-template-columns: 1fr;
+  }
+  .symbolon__data {
+    display: none;
+  }
+  .symbolon__title {
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+  }
+}

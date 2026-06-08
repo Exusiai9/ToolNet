@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import SymbolonHero from './SymbolonHero'
 import './HomeScene.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -100,24 +101,9 @@ export default function HomeScene() {
         ))}
       </nav>
 
-      {/* 00 · 展示首屏(占位) */}
+      {/* 00 · 展示首屏(SYMBOLON) */}
       <section className="home__section home__hero" ref={(el) => (sectionRefs.current[0] = el)}>
-        <div className="home__hero-inner">
-          <span className="home__kicker mono" data-anim>
-            // PERSONAL RELAY TERMINAL
-          </span>
-          <h1 className="home__brand" data-anim>
-            TOOLNET
-          </h1>
-          <p className="home__lead" data-anim>
-            个人信息中转终端 · 一处出发,通往一切。
-          </p>
-          <div className="home__hero-bar hazard" data-anim />
-        </div>
-        <button className="home__scroll" onClick={() => goTo(1)} aria-label="向下滚动">
-          <span className="mono">SCROLL</span>
-          <span className="home__chev" />
-        </button>
+        <SymbolonHero onScrollDown={() => goTo(1)} />
       </section>
 
       {/* 01-04 · 扇区板块 */}
