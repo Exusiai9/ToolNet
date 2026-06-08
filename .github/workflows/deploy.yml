@@ -30,7 +30,9 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm ci
+        # 使用 npm install 而非 npm ci：Vite 8 的 @emnapi/* 嵌套可选依赖
+        # 会让 npm ci 误判锁文件不同步，这是已知的 npm bug，install 可正常解析。
+        run: npm install --no-audit --no-fund
 
       - name: Build
         run: npm run build
