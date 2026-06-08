@@ -1,0 +1,28 @@
+.footer {
+  margin-top: 48px;
+}
+.footer__line {
+  height: 3px;
+  opacity: 0.7;
+}
+.footer__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 20px 4px 8px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-2);
+}
+.footer__mid {
+  color: var(--text-3);
+}
+.footer__gh {
+  color: var(--text-1);
+  transition: color 0.18s;
+}
+.footer__gh:hover {
+  color: var(--accent);
+}

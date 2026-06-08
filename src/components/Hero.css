@@ -1,0 +1,129 @@
+.hero {
+  position: relative;
+  margin: 26px 0 36px;
+  padding: 34px 34px 30px;
+  border: 1px solid var(--line);
+  background: linear-gradient(120deg, var(--surface) 0%, rgba(21, 22, 28, 0.4) 60%, transparent 100%);
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+/* 角落括号装饰 */
+.hero__deco--brackets {
+  position: absolute;
+  inset: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-size: 120px;
+  line-height: 0.8;
+  color: var(--line-2);
+  pointer-events: none;
+}
+
+.hero__main {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.hero__kick {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.hero__kick-bar {
+  width: 28px;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+.hero__title-line {
+  display: block;
+  font-size: clamp(40px, 7vw, 80px);
+}
+.hero__title-line .accent {
+  color: var(--accent);
+  text-shadow: 0 0 28px var(--accent-glow);
+}
+.hero__title-line--outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line-strong);
+  letter-spacing: 4px;
+  font-weight: 600;
+}
+
+.hero__desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-1);
+  letter-spacing: 0.3px;
+}
+
+/* 右侧统计 */
+.hero__stats {
+  position: absolute;
+  top: 34px;
+  right: 34px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: right;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.stat__label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-3);
+}
+.stat__value {
+  font-size: 30px;
+  line-height: 1;
+  color: var(--text-0);
+}
+.stat__value--live {
+  color: var(--accent);
+  text-shadow: 0 0 18px var(--accent-glow);
+}
+
+.hero__stripe {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  opacity: 0.85;
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 24px 20px;
+  }
+  .hero__stats {
+    position: static;
+    flex-direction: row;
+    gap: 24px;
+    text-align: left;
+    margin-top: 22px;
+  }
+  .hero__deco--brackets {
+    display: none;
+  }
+}

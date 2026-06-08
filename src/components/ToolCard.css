@@ -1,0 +1,148 @@
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg-1) 100%);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s, background 0.2s;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+.card::before {
+  /* 悬停时从左扫过的高光 */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, var(--accent-soft) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 207, 43, 0.5);
+  background: linear-gradient(135deg, var(--surface-2) 0%, var(--bg-1) 100%);
+}
+.card:hover::before {
+  transform: translateX(100%);
+}
+
+/* 角标编号 */
+.card__idx {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 10px;
+  color: var(--text-3);
+  transition: color 0.2s;
+}
+.card:hover .card__idx {
+  color: var(--accent);
+}
+
+/* 图标 */
+.card__icon {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+.card:hover .card__icon {
+  border-color: rgba(255, 207, 43, 0.5);
+  box-shadow: 0 0 16px -6px var(--accent-glow);
+}
+.card__icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+.card__fallback {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--accent);
+}
+
+/* 文本 */
+.card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.card__name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: var(--text-0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card__desc {
+  font-size: 12.5px;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card__host {
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 打开指示 */
+.card__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-3);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s, transform 0.2s, color 0.2s;
+  flex: none;
+}
+.card:hover .card__open {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--accent);
+}
+
+/* 悬停描边角 */
+.card__corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.card__corner--tr {
+  top: 4px;
+  right: 4px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+.card__corner--bl {
+  bottom: 4px;
+  left: 4px;
+  border-bottom: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+}
+.card:hover .card__corner {
+  opacity: 0.9;
+}

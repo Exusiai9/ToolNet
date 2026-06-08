@@ -1,0 +1,230 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  z-index: 20;
+  border-right: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  backdrop-filter: blur(6px);
+}
+
+.sidebar__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 22px 18px 18px;
+}
+
+/* —— 品牌 —— */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.brand__mark {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.brand__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: var(--text-0);
+}
+.brand__sub {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-top: 5px;
+}
+
+.sidebar__tag {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-2);
+  padding: 12px 2px 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* —— 导航列表 —— */
+.navlist {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  overflow-y: auto;
+  margin: 0 -6px;
+  padding: 0 6px;
+}
+.navlist__label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-3);
+  padding: 6px 4px 10px;
+}
+
+.navitem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  text-align: left;
+  padding: 11px 12px;
+  color: var(--text-1);
+  border: 1px solid transparent;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
+}
+.navitem:hover {
+  background: var(--surface);
+  color: var(--text-0);
+  border-color: var(--line-2);
+}
+.navitem--on {
+  background: var(--accent-soft);
+  border-color: rgba(255, 207, 43, 0.45);
+  color: var(--text-0);
+}
+.navitem__idx {
+  font-size: 11px;
+  color: var(--text-3);
+  width: 18px;
+  flex: none;
+}
+.navitem--on .navitem__idx {
+  color: var(--accent);
+}
+.navitem__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.navitem__name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.navitem__desc {
+  font-size: 9.5px;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.navitem__count {
+  font-size: 12px;
+  color: var(--text-2);
+  flex: none;
+}
+.navitem--on .navitem__count {
+  color: var(--accent);
+}
+/* 选中态左侧指示条 */
+.navitem__bar {
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 60%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  transition: transform 0.2s;
+}
+.navitem--on .navitem__bar {
+  transform: translateY(-50%) scaleY(1);
+}
+
+/* —— 底部状态 —— */
+.sidebar__foot {
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.status {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ghlink {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-2);
+  transition: color 0.18s;
+}
+.ghlink:hover {
+  color: var(--accent);
+}
+
+/* —— 小圆点 —— */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-2);
+  flex: none;
+}
+.dot--live {
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-glow);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(255, 207, 43, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 207, 43, 0);
+  }
+}
+
+/* —— 响应式：窄屏转顶部抽屉 —— */
+@media (max-width: 880px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .navlist {
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+  .navlist__label,
+  .sidebar__tag {
+    display: none;
+  }
+  .navitem {
+    width: auto;
+    flex: 1 1 140px;
+  }
+}

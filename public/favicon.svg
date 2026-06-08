@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" fill="#0b0b0d"/>
+  <rect x="1" y="1" width="46" height="46" fill="none" stroke="#22242e" stroke-width="2"/>
+  <!-- 切角主体 -->
+  <path d="M10 9 H39 V31 L31 39 H9 V18 Z" fill="#ffcf2b"/>
+  <!-- 内部 T 形负空间 -->
+  <path d="M16 16 H33 V20 H26.5 V32 H22.5 V20 H16 Z" fill="#0b0b0d"/>
+  <!-- 右下角小切块 -->
+  <path d="M33 33 L39 33 L39 39 Z" fill="#0b0b0d"/>
+</svg>
