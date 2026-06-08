@@ -1,5 +1,5 @@
-/* —— 整体布局 —— */
-.app {
+/* —— 工具扇区布局（由原 App.css 迁入；.app → .tools）—— */
+.tools {
   position: relative;
   z-index: 1;
 }

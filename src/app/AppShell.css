@@ -1,0 +1,19 @@
+.shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* 主区:为常驻的左侧扇区栏让出宽度 */
+.shell__main {
+  position: relative;
+  z-index: 1;
+  margin-left: var(--rail-w);
+  min-height: 100vh;
+}
+
+@media (max-width: 880px) {
+  .shell__main {
+    margin-left: 0;
+  }
+}

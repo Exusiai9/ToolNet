@@ -1,7 +1,7 @@
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  left: var(--rail-w); /* 让出最左侧常驻的扇区导航栏 SceneRail */
   width: var(--sidebar-w);
   height: 100vh;
   z-index: 20;
@@ -209,6 +209,7 @@
 @media (max-width: 880px) {
   .sidebar {
     position: relative;
+    left: 0;
     width: 100%;
     height: auto;
     border-right: none;

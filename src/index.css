@@ -40,6 +40,7 @@
   --font-mono: 'Share Tech Mono', ui-monospace, 'Cascadia Mono', monospace;
 
   /* —— 尺寸 —— */
+  --rail-w: 84px; /* 顶层扇区导航栏(SceneRail)宽度 */
   --sidebar-w: 248px;
   --topbar-h: 60px;
   --cut: 10px; /* 切角大小 */
