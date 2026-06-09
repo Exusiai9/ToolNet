@@ -3,12 +3,15 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px 18px;
-  background: linear-gradient(135deg, var(--surface) 0%, var(--bg-1) 100%);
+  padding: 17px 18px;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--line);
   overflow: hidden;
-  transition: transform 0.2s ease, border-color 0.2s, background 0.2s;
+  transition: transform 0.2s ease, border-color 0.2s, background 0.2s, box-shadow 0.2s;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 .card::before {
   /* 悬停时从左扫过的高光 */
@@ -22,8 +25,9 @@
 }
 .card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 207, 43, 0.5);
-  background: linear-gradient(135deg, var(--surface-2) 0%, var(--bg-1) 100%);
+  border-color: rgba(255, 207, 43, 0.45);
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.7);
 }
 .card:hover::before {
   transform: translateX(100%);
@@ -49,8 +53,8 @@
   flex: none;
   display: grid;
   place-items: center;
-  background: var(--bg-2);
-  border: 1px solid var(--line-2);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
   transition: border-color 0.2s, box-shadow 0.2s;
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
 }
@@ -145,4 +149,24 @@
 }
 .card:hover .card__corner {
   opacity: 0.9;
+}
+
+/* 长按反馈:底部进度条(填满即跳转档案页) */
+.card--pressing {
+  border-color: rgba(255, 207, 43, 0.6);
+}
+.card__press {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  pointer-events: none;
+  z-index: 3;
+}
+.card--pressing .card__press {
+  width: 100%;
+  transition: width 0.45s linear;
 }

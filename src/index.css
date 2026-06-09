@@ -40,7 +40,7 @@
   --font-mono: 'Share Tech Mono', ui-monospace, 'Cascadia Mono', monospace;
 
   /* —— 尺寸 —— */
-  --rail-w: 84px; /* 顶层扇区导航栏(SceneRail)宽度 */
+  --nav-h: 64px; /* 顶部扇区导航栏高度 */
   --sidebar-w: 248px;
   --topbar-h: 60px;
   --cut: 10px; /* 切角大小 */
@@ -133,6 +133,31 @@ input {
     var(--accent) 0 10px,
     #0b0b0d 10px 20px
   );
+}
+
+/* —— 状态圆点(全局复用)—— */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-2);
+  flex: none;
+}
+.dot--live {
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--accent-glow);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(255, 207, 43, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 207, 43, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

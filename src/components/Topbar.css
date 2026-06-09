@@ -1,6 +1,6 @@
 .topbar {
   position: sticky;
-  top: 0;
+  top: var(--nav-h);
   z-index: 15;
   height: var(--topbar-h);
   display: flex;

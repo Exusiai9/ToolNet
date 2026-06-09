@@ -1,6 +1,7 @@
-/* 整屏吸附:仅主页挂载时为滚动根(html)启用 */
+/* 整屏吸附:仅主页挂载时为滚动根(html)启用;scroll-padding 让吸附点落在顶栏下方 */
 html.snap-home {
   scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--nav-h);
 }
 
 .home {
@@ -9,7 +10,7 @@ html.snap-home {
 
 .home__section {
   position: relative;
-  height: 100vh;
+  height: calc(100vh - var(--nav-h));
   scroll-snap-align: start;
   overflow: hidden;
   display: flex;
@@ -164,7 +165,7 @@ html.snap-home {
   }
   .home__section {
     height: auto;
-    min-height: 100vh;
+    min-height: calc(100vh - var(--nav-h));
   }
   .home__dots {
     display: none;

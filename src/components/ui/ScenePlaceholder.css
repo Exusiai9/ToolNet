@@ -1,5 +1,5 @@
 .scene-ph {
-  min-height: 100vh;
+  min-height: calc(100vh - var(--nav-h));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +57,7 @@
 
 @media (max-width: 880px) {
   .scene-ph {
-    min-height: calc(100vh - 56px);
+    min-height: calc(100vh - var(--nav-h));
     padding: 40px 16px;
   }
   .scene-ph__title {

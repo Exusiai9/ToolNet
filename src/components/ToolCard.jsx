@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './ToolCard.css'
 
 /** 从网址解析主域名 */
@@ -10,19 +10,58 @@ function hostOf(url) {
   }
 }
 
-/** 单个工具卡片 */
-export default function ToolCard({ tool, index }) {
+const LONG_PRESS_MS = 450
+
+/**
+ * 单个工具卡片
+ * 交互:点击打开网站(新标签);长按跳转该工具的档案页(onDetail)。
+ * @param onDetail 长按回调,接收 tool
+ */
+export default function ToolCard({ tool, index, onDetail }) {
   const [iconFail, setIconFail] = useState(false)
+  const [pressing, setPressing] = useState(false)
+  const timerRef = useRef(null)
+  const firedRef = useRef(false) // 长按已触发 → 抑制随后的 click(避免又打开网站)
   const host = hostOf(tool.url)
   const favicon = `https://www.google.com/s2/favicons?domain=${host}&sz=64`
 
+  const startPress = (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return
+    firedRef.current = false
+    setPressing(true)
+    clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => {
+      firedRef.current = true
+      setPressing(false)
+      onDetail?.(tool)
+    }, LONG_PRESS_MS)
+  }
+  const cancelPress = () => {
+    clearTimeout(timerRef.current)
+    setPressing(false)
+  }
+  const handleClick = (e) => {
+    if (firedRef.current) {
+      e.preventDefault() // 刚才是长按 → 不打开网站
+      firedRef.current = false
+    }
+  }
+
   return (
     <a
-      className="card reveal-card"
+      className={`card reveal-card${pressing ? ' card--pressing' : ''}`}
       href={tool.url}
       target="_blank"
       rel="noreferrer"
       style={{ '--i': index }}
+      draggable={false}
+      onPointerDown={startPress}
+      onPointerUp={cancelPress}
+      onPointerLeave={cancelPress}
+      onPointerCancel={cancelPress}
+      onClick={handleClick}
+      onContextMenu={(e) => e.preventDefault()}
+      title="点击打开 · 长按查看详情"
     >
       {/* 角标编号 */}
       <span className="card__idx mono">{String(index + 1).padStart(2, '0')}</span>
@@ -60,6 +99,9 @@ export default function ToolCard({ tool, index }) {
       {/* 悬停描边角 */}
       <span className="card__corner card__corner--tr" />
       <span className="card__corner card__corner--bl" />
+
+      {/* 长按进度条 */}
+      <span className="card__press" aria-hidden="true" />
     </a>
   )
 }

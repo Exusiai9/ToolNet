@@ -7,10 +7,47 @@
 .content {
   position: relative;
   z-index: 1;
-  margin-left: var(--sidebar-w);
-  min-height: 100vh;
+  min-height: calc(100vh - var(--nav-h));
   display: flex;
   flex-direction: column;
+}
+
+/* —— 大类:横向标签 —— */
+.group-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin: 4px 0 2px;
+  border-bottom: 1px solid var(--line);
+}
+.group-tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 11px 18px;
+  margin-bottom: -1px;
+  color: var(--text-2);
+  border-bottom: 2px solid transparent;
+  transition: color 0.18s, border-color 0.18s;
+}
+.group-tab:hover {
+  color: var(--text-0);
+}
+.group-tab--on {
+  color: var(--text-0);
+  border-bottom-color: var(--accent);
+}
+.group-tab__name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.group-tab__count {
+  font-size: 11px;
+  color: var(--text-3);
+}
+.group-tab--on .group-tab__count {
+  color: var(--accent);
 }
 
 .main {
@@ -21,12 +58,41 @@
   padding: 8px 32px 40px;
 }
 
+/* —— 学科横切筛选 chips —— */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 6px;
+}
+.chip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text-2);
+  padding: 7px 13px;
+  border: 1px solid var(--line);
+  background: transparent;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+.chip:hover {
+  color: var(--text-0);
+  border-color: var(--line-2);
+  background: rgba(255, 255, 255, 0.03);
+}
+.chip--on {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: rgba(255, 207, 43, 0.5);
+}
+
 /* —— 分类区块 —— */
 .section {
-  margin-top: 34px;
+  margin-top: 44px;
 }
 .section:first-of-type {
-  margin-top: 22px;
+  margin-top: 26px;
 }
 
 .section__head {
@@ -72,8 +138,8 @@
 /* —— 工具网格 —— */
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  gap: 18px;
 }
 
 /* —— 空状态 —— */
@@ -115,9 +181,6 @@
 
 /* —— 响应式 —— */
 @media (max-width: 880px) {
-  .content {
-    margin-left: 0;
-  }
   .main {
     padding: 8px 16px 32px;
   }

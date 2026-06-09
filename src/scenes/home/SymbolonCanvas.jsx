@@ -101,7 +101,7 @@ const fragmentShader = /* glsl */ `
 
 /**
  * SYMBOLON 流体光晕 WebGL 背景(Three.js)。
- * 尺寸/坐标按容器(而非整窗)计算,以适配右移了 SceneRail 的主区。
+ * 尺寸/坐标按容器(而非整窗)计算,以适配主区布局。
  * @param coordsRef 指向坐标显示元素的 ref,鼠标移动时直接更新其文本(避免 React 重渲)
  */
 export default function SymbolonCanvas({ coordsRef }) {
@@ -159,14 +159,14 @@ export default function SymbolonCanvas({ coordsRef }) {
     window.addEventListener('mousemove', onMouse)
 
     let raf
-    const clock = new THREE.Clock()
+    const start = performance.now()
 
     if (prefersReducedMotion) {
       renderer.render(scene, camera) // 静态一帧,不进动画循环
     } else {
       const animate = () => {
         raf = requestAnimationFrame(animate)
-        uniforms.u_time.value = clock.getElapsedTime()
+        uniforms.u_time.value = (performance.now() - start) / 1000
         uniforms.u_mouse.value.lerp(mouseTarget, 0.05)
         renderer.render(scene, camera)
       }

@@ -7,7 +7,7 @@ const SymbolonCanvas = lazy(() => import('./SymbolonCanvas'))
 /**
  * 主页第 0 屏 —— SYMBOLON 展示首屏(源自 Head01.html)。
  * 字体已统一为站点字体(衬线→var(--font-display)、等宽→var(--font-mono)),
- * 颜色保留 SYMBOLON 暖金/黑;去掉原 spine(由站点 SceneRail 充当左栏)。
+ * 颜色保留 SYMBOLON 暖金/黑;去掉原 spine(站点导航已统一到顶部 TopNav)。
  * 文案沿用原稿,后续可改。
  * @param onScrollDown 点击底部 SCROLL 时回调(滚动到下一屏)
  */
