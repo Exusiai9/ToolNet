@@ -1,0 +1,288 @@
+.admin {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px clamp(16px, 4vw, 48px) 60px;
+}
+
+.admin__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.admin__crumb {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+.admin__title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-0);
+  margin-top: 4px;
+}
+.admin__badge {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-2);
+  padding: 6px 12px;
+  border: 1px solid var(--line-2);
+  white-space: nowrap;
+}
+.admin__badge--on {
+  color: var(--accent);
+  border-color: rgba(255, 207, 43, 0.5);
+  background: var(--accent-soft);
+}
+
+/* 工具条 */
+.admin__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+.admin__spacer {
+  flex: 1;
+}
+.admin__search {
+  flex: 1;
+  min-width: 160px;
+  max-width: 320px;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  color: var(--text-0);
+  font-size: 13px;
+  outline: none;
+}
+.admin__search:focus {
+  border-color: rgba(255, 207, 43, 0.5);
+}
+.admin__select {
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  color: var(--text-1);
+  font-size: 13px;
+}
+
+.admin__btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text-1);
+  padding: 8px 14px;
+  border: 1px solid var(--line-2);
+  background: transparent;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+.admin__btn:hover {
+  color: var(--text-0);
+  border-color: var(--line-strong);
+}
+.admin__btn--primary {
+  color: #000;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.admin__btn--primary:hover {
+  filter: brightness(1.08);
+  color: #000;
+}
+.admin__btn--danger {
+  color: var(--danger);
+  border-color: rgba(255, 90, 60, 0.4);
+}
+.admin__btn--danger:hover {
+  color: #fff;
+  background: rgba(255, 90, 60, 0.18);
+}
+
+/* 表单 */
+.admin__form {
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(255, 207, 43, 0.35);
+  background: linear-gradient(160deg, var(--surface), var(--bg-1));
+}
+.admin__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.admin__field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.admin__field--wide {
+  grid-column: 1 / -1;
+}
+.admin__field span {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--text-2);
+}
+.admin__field input,
+.admin__field select {
+  padding: 8px 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  color: var(--text-0);
+  font-size: 13px;
+  outline: none;
+}
+.admin__field input:focus,
+.admin__field select:focus {
+  border-color: rgba(255, 207, 43, 0.5);
+}
+
+.admin__disc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+}
+.admin__disc-label {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--text-2);
+  margin-right: 4px;
+}
+.admin__chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-2);
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+.admin__chip--on {
+  color: var(--accent);
+  border-color: rgba(255, 207, 43, 0.5);
+  background: var(--accent-soft);
+}
+
+.admin__form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* 列表 */
+.admin__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.admin__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s, border-color 0.15s;
+}
+.admin__row:hover {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: var(--line);
+}
+.admin__fav {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  object-fit: contain;
+}
+.admin__rowmain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.admin__rowname {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-0);
+}
+.admin__rowmeta {
+  font-size: 10.5px;
+  color: var(--text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.admin__mini {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-2);
+  padding: 5px 10px;
+  border: 1px solid var(--line-2);
+  background: transparent;
+  flex: none;
+  transition: color 0.15s, border-color 0.15s;
+}
+.admin__mini:hover {
+  color: var(--accent);
+  border-color: rgba(255, 207, 43, 0.5);
+}
+.admin__mini--danger:hover {
+  color: var(--danger);
+  border-color: rgba(255, 90, 60, 0.5);
+}
+.admin__empty {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-3);
+}
+
+/* 导出 */
+.admin__export {
+  margin-top: 20px;
+  border: 1px solid var(--line-2);
+  background: var(--bg-1);
+}
+.admin__export-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--text-2);
+}
+.admin__export-head > span:last-child {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+.admin__export-text {
+  width: 100%;
+  height: 320px;
+  padding: 12px;
+  background: var(--bg-0);
+  border: none;
+  color: var(--text-1);
+  font-size: 12px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+}
+
+@media (max-width: 720px) {
+  .admin__form-grid {
+    grid-template-columns: 1fr;
+  }
+}

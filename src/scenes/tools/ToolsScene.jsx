@@ -3,7 +3,8 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
-import { disciplines, groups, tools, toolSlug } from '../../data/tools'
+import { disciplines, groups, toolSlug } from '../../data/tools'
+import { useTools } from '../../data/toolStore'
 import Topbar from '../../components/Topbar'
 import Hero from '../../components/Hero'
 import ToolCard from '../../components/ToolCard'
@@ -28,6 +29,7 @@ export default function ToolsScene() {
   const [query, setQuery] = useState('')
   const appRef = useRef(null)
   const mainRef = useRef(null)
+  const tools = useTools()
 
   const activeGroup = groups.find((g) => g.id === groupParam)?.id ?? groups[0].id
   const activeDiscipline = searchParams.get('d') || null
@@ -38,7 +40,7 @@ export default function ToolsScene() {
     const m = {}
     for (const t of tools) m[t.group] = (m[t.group] || 0) + 1
     return m
-  }, [])
+  }, [tools])
 
   // 过滤 + 按 大类→子类 顺序分区
   const sections = useMemo(() => {
@@ -61,7 +63,7 @@ export default function ToolsScene() {
       }
     }
     return result
-  }, [activeGroup, activeDiscipline, q])
+  }, [activeGroup, activeDiscipline, q, tools])
 
   const totalShown = sections.reduce((n, s) => n + s.list.length, 0)
   const activeGroupObj = groups.find((g) => g.id === activeGroup)

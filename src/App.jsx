@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 import AppShell from './app/AppShell'
@@ -8,6 +9,9 @@ import LinksScene from './scenes/links/LinksScene'
 import FeedScene from './scenes/feed/FeedScene'
 import NotesScene from './scenes/notes/NotesScene'
 import NotFoundScene from './scenes/NotFoundScene'
+
+// 隐藏的在线编辑界面(#/admin),懒加载,不进默认包
+const AdminScene = lazy(() => import('./scenes/admin/AdminScene'))
 
 /**
  * 路由总表 —— 所有顶层扇区都挂在持久外壳 AppShell 下。
@@ -26,6 +30,14 @@ export default function App() {
         <Route path="feed" element={<FeedScene />} />
         <Route path="notes" element={<NotesScene />} />
         <Route path="notes/:slug" element={<NotesScene />} />
+        <Route
+          path="admin"
+          element={
+            <Suspense fallback={null}>
+              <AdminScene />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<NotFoundScene />} />
       </Route>
     </Routes>

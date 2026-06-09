@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
-import { groups, tools, disciplines as allDisciplines, toolSlug } from '../../data/tools'
+import { groups, disciplines as allDisciplines, toolSlug } from '../../data/tools'
+import { useTools } from '../../data/toolStore'
 import './ToolDetail.css'
 
 const prefersReducedMotion =
@@ -29,6 +30,7 @@ export default function ToolDetailScene() {
   const navigate = useNavigate()
   const rootRef = useRef(null)
   const [iconFail, setIconFail] = useState(false)
+  const tools = useTools()
 
   const tool = tools.find((t) => toolSlug(t.name) === slug)
   const g = tool && groups.find((x) => x.id === tool.group)
